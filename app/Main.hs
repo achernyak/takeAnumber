@@ -1,6 +1,13 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import Lib
+import Data.Monoid
+import Web.Spock.Safe
 
 main :: IO ()
-main = someFunc
+main =
+    runSpock 8080 $ spockT id $
+    do get root $
+           text "Hello World!"
+       get ("hello" <//> var) $ \name ->
+           text ("Hello " <> name <> "!")
