@@ -26,6 +26,8 @@ executable takeAnumber
   build-depends:       base
                      , takeAnumber
                      , Spock
+                     , users
+                     , users-persistent
   default-language:    Haskell2010
 
 test-suite takeAnumber-test
