@@ -35,8 +35,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :takeAnumber, TakeAnumber.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "artemchernyak",
-  password: "",
+  username: "postgres",
+  password: "postgres",
   database: "takeanumber_dev",
   hostname: "localhost",
   pool_size: 10

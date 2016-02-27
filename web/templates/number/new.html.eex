@@ -1,0 +1,6 @@
+<h2>New number</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: number_path(@conn, :create) %>
+
+<%= link "Back", to: number_path(@conn, :index) %>

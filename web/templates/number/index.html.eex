@@ -1,0 +1,26 @@
+<h2>Listing numbers</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Served</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for number <- @numbers do %>
+    <tr>
+      <td><%= number.served %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: number_path(@conn, :show, number), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: number_path(@conn, :edit, number), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: number_path(@conn, :delete, number), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New number", to: number_path(@conn, :new) %>

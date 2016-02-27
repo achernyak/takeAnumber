@@ -1,0 +1,13 @@
+<h2>Show number</h2>
+
+<ul>
+
+  <li>
+    <strong>Served:</strong>
+    <%= @number.served %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: number_path(@conn, :edit, @number) %>
+<%= link "Back", to: number_path(@conn, :index) %>
