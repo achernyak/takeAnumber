@@ -18,6 +18,7 @@ defmodule TakeAnumber.Router do
 
     get "/", PageController, :index
     patch "/next/:id", PageController, :next
+    post "/new", PageController, :new
 
     resources "/user", UserController
     resources "/numbers", NumberController
