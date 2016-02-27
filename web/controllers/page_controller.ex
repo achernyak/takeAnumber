@@ -8,11 +8,10 @@ defmodule TakeAnumber.PageController do
       where: n.served == false
     case Repo.all(query) do
       [] ->
-
+        render(conn, "finished.html")
+      [number | _] ->
+        render(conn, "index.html", number: number)
     end
-    [number | _] = Repo.all(query)
-
-    render(conn, "index.html", number: number)
   end
 
   def next(conn, %{"id" => id}) do
