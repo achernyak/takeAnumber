@@ -17,8 +17,11 @@ defmodule TakeAnumber.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    patch "/next/:id", PageController, :next
     post "/new", PageController, :new
+
+    get "/next", NumberController, :next_page
+    patch "/next/:id", NumberController, :next
+    put "/next/:id", NumberController, :next
 
     resources "/user", UserController
     resources "/numbers", NumberController

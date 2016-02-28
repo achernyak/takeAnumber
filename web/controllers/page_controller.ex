@@ -14,20 +14,6 @@ defmodule TakeAnumber.PageController do
     end
   end
 
-  def next(conn, %{"id" => id}) do
-    number = Repo.get!(Number, id)
-    changeset = Number.changeset(number, %{served: true})
-
-    case Repo.update(changeset) do
-      {:ok, number} ->
-        conn
-        |> redirect(to: page_path(conn, :index))
-      {:error, _} ->
-        conn
-        |> put_flash(:error, "Something went wrong")
-    end
-  end
-
   def new(conn, _params) do
     number = Repo.insert!(%Number{})
     conn

@@ -18,15 +18,7 @@ defmodule TakeAnumber.PageControllerTest do
     assert html_response(conn, 200) =~ "Now Serving"
   end
 
-  test "next changes served to true in the current number and redirects to index", %{conn: conn} do
-    number = Repo.insert! %Number{}
-    conn = patch conn, page_path(conn, :next, number)
-    
-    assert Repo.get!(Number, number.id).served != number.served
-    assert redirected_to(conn) == page_path(conn, :index)
-  end
-
-  test "new inserts an entry and redirects to indes", %{conn: conn} do
+  test "POST /new inserts an entry and redirects to indes", %{conn: conn} do
     old_length = Repo.all(Number) |> length
     conn = post conn, page_path(conn, :new)
     new_length = Repo.all(Number) |> length

@@ -2,5 +2,5 @@
   <h2>Now Serving</h2>
   <p><%= @number.id %></p>
   <%= link "New Number", to: page_path(@conn, :new), method: :post, class: "btn btn-primary" %>
-  <%= link "Next Number", to: page_path(@conn, :next, @number), method: :patch, class: "btn btn-default" %>
 </div>
+  <%= link "Next Number", to: number_path(@conn, :next, @number), method: :patch, class: "btn btn-default" %>

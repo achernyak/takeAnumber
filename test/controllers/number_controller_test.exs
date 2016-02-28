@@ -5,6 +5,48 @@ defmodule TakeAnumber.NumberControllerTest do
   @valid_attrs %{served: true}
   @blank_attrs %{}
 
+  def with_valid_authorization_header(conn) do
+    conn
+    |> put_req_header("authorization", "Basic ZGV2OmRldnRlYW0=")
+  end
+
+  def with_invalid_authorization_header(conn) do
+    conn
+    |> put_req_header("authorization", "Basic I like turtles")
+  end
+
+  test "GET /next without authorization header should throw 401", %{conn: conn} do
+    conn = get conn, "/next"
+    assert response(conn, 401) == "unauthorized"
+    assert get_resp_header(conn, "www-authenticate") == ["Basic reaml=\"Thou Shalt not pass\""]
+  end
+
+  test "Get /next with incorrect authorization should throw 401", %{conn: conn} do
+    conn = conn
+    |> with_invalid_authorization_header()
+    |> get("/next")
+
+    assert response(conn, 401) == "unauthorized"
+    assert get_resp_header(conn, "www-authenticate") == ["Basic reaml=\"Thou Shalt not pass\""]
+  end
+
+  test "GET /next with correct authorization should be OK", %{conn: conn} do
+    conn = conn
+    |> with_valid_authorization_header()
+    |> get("/next")
+
+    assert html_response(conn, 200) =~ "Everyone is happy"
+  end
+
+  test "PATCH /next/:id changes served to true in the current number and redirects to index", %{conn: conn} do
+    number = Repo.insert! %Number{}
+    conn = conn
+    |> patch(page_path(conn, :next, number))
+
+    assert Repo.get!(Number, number.id).served != number.served
+    assert redirected_to(conn) == page_path(conn, :index)
+  end
+
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, number_path(conn, :index)
     assert html_response(conn, 200) =~ "Listing numbers"
