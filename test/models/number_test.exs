@@ -4,15 +4,15 @@ defmodule TakeAnumber.NumberTest do
   alias TakeAnumber.Number
 
   @valid_attrs %{served: true}
-  @invalid_attrs %{}
+  @blank_attrs %{}
 
   test "changeset with valid attributes" do
     changeset = Number.changeset(%Number{}, @valid_attrs)
     assert changeset.valid?
   end
 
-  test "changeset with invalid attributes" do
-    changeset = Number.changeset(%Number{}, @invalid_attrs)
-    refute changeset.valid?
+  test "change set is valid with blank attributes" do
+    changeset = Number.changeset(%Number{}, @blank_attrs)
+    assert changeset.valid?
   end
 end

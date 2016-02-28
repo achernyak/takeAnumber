@@ -3,7 +3,7 @@ defmodule TakeAnumber.NumberControllerTest do
 
   alias TakeAnumber.Number
   @valid_attrs %{served: true}
-  @invalid_attrs %{}
+  @blank_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, number_path(conn, :index)
@@ -51,10 +51,11 @@ defmodule TakeAnumber.NumberControllerTest do
     assert Repo.get_by(Number, @valid_attrs)
   end
 
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
+  test "updates chosen resource and redirects to data when data is blank", %{conn: conn} do
     number = Repo.insert! %Number{}
-    conn = put conn, number_path(conn, :update, number), number: @invalid_attrs
-    assert html_response(conn, 200) =~ "Edit number"
+    conn = put conn, number_path(conn, :update, number), number: @blank_attrs
+    assert redirected_to(conn) == number_path(conn, :show, number)
+    assert Repo.get_by(Number, @blank_attrs)
   end
 
   test "deletes chosen resource", %{conn: conn} do
