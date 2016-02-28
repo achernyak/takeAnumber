@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>cover/Elixir.TakeAnumber.ErrorHelpers.html</title>
+</head><body style='background-color: white; color: black'>
+<pre>
+File generated from /home/artem/dev/takeAnumber/web/views/error_helpers.ex by COVER 2016-02-28 at 09:29:36
+
+****************************************************************************
+
+        |  defmodule TakeAnumber.ErrorHelpers do
+        |    @moduledoc """
+        |    Conveniences for translating and building error messages.
+        |    """
+        |  
+        |    use Phoenix.HTML
+        |  
+        |    @doc """
+        |    Generates tag for inlined form input errors.
+        |    """
+        |    def error_tag(form, field) do
+    10..|      if error = form.errors[field] do
+     4..|        content_tag :span, translate_error(error), class: "help-block"
+        |      end
+        |    end
+        |  
+        |    @doc """
+        |    Translates an error message using gettext.
+        |    """
+        |    def translate_error({msg, opts}) do
+        |      # Because error messages were defined within Ecto, we must
+        |      # call the Gettext module passing our Gettext backend. We
+        |      # also use the "errors" domain as translations are placed
+        |      # in the errors.po file. On your own code and templates,
+        |      # this could be written simply as:
+        |      #
+        |      #     dngettext "errors", "1 file", "%{count} files", count
+        |      #
+<font color=red>     0..|      Gettext.dngettext(TakeAnumber.Gettext, "errors", msg, msg, opts[:count], opts)</font>
+        |    end
+        |  
+        |    def translate_error(msg) do
+     4..|      Gettext.dgettext(TakeAnumber.Gettext, "errors", msg)
+        |    end
+        |  end
+</pre>
+</body>
+</html>

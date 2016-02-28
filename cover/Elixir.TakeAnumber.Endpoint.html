@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>cover/Elixir.TakeAnumber.Endpoint.html</title>
+</head><body style='background-color: white; color: black'>
+<pre>
+File generated from /home/artem/dev/takeAnumber/lib/takeAnumber/endpoint.ex by COVER 2016-02-28 at 09:29:36
+
+****************************************************************************
+
+<font color=red>     0..|  defmodule TakeAnumber.Endpoint do</font>
+        |    use Phoenix.Endpoint, otp_app: :takeAnumber
+        |  
+        |    socket "/socket", TakeAnumber.UserSocket
+        |  
+        |    # Serve at "/" the static files from "priv/static" directory.
+        |    #
+        |    # You should set gzip to true if you are running phoenix.digest
+        |    # when deploying your static files in production.
+        |    plug Plug.Static,
+        |      at: "/", from: :takeAnumber, gzip: false,
+        |      only: ~w(css fonts images js favicon.ico robots.txt)
+        |  
+        |    # Code reloading can be explicitly enabled under the
+        |    # :code_reloader configuration of your endpoint.
+        |    if code_reloading? do
+        |      socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
+        |      plug Phoenix.LiveReloader
+        |      plug Phoenix.CodeReloader
+        |    end
+        |  
+        |    plug Plug.RequestId
+        |    plug Plug.Logger
+        |  
+        |    plug Plug.Parsers,
+        |      parsers: [:urlencoded, :multipart, :json],
+        |      pass: ["*/*"],
+        |      json_decoder: Poison
+        |  
+        |    plug Plug.MethodOverride
+        |    plug Plug.Head
+        |  
+        |    plug Plug.Session,
+        |      store: :cookie,
+        |      key: "_takeAnumber_key",
+        |      signing_salt: "PpdPXfzM"
+        |  
+        |    plug TakeAnumber.Router
+        |  end
+</pre>
+</body>
+</html>

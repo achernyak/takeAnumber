@@ -29,17 +29,9 @@ defmodule TakeAnumber.PageController do
   end
 
   def new(conn, _params) do
-    changeset = Number.changeset(%Number{}, %{served: false})
-
-    case Repo.insert(changeset) do
-      {:ok, number} ->
-        conn
-        |> put_flash(:info, "You are ##{number.id}, you will be served in order.")
-        |> redirect(to: page_path(conn, :index))
-      {:error, _} ->
-        conn
-        |> put_flash(:error, "Something went wrong! Please try again.")
-        |> redirect(to: page_path(conn, :index))
-    end
+    number = Repo.insert!(%Number{})
+    conn
+    |> put_flash(:info, "You are # #{number.id}, you will be served in order.")
+    |> redirect(to: page_path(conn, :index))
   end
 end

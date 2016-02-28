@@ -21,9 +21,10 @@ defmodule TakeAnumber.NumberControllerTest do
     assert Repo.get_by(Number, @valid_attrs)
   end
 
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
-    conn = post conn, number_path(conn, :create), number: @invalid_attrs
-    assert html_response(conn, 200) =~ "New number"
+  test "creates resource and redirect when data is blank", %{conn: conn} do
+    conn = post conn, number_path(conn, :create), number: @blank_attrs
+    assert redirected_to(conn) == number_path(conn, :index)
+    assert Repo.get_by(Number, @blank_attrs)
   end
 
   test "shows chosen resource", %{conn: conn} do

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>cover/Elixir.TakeAnumber.PageController.html</title>
+</head><body style='background-color: white; color: black'>
+<pre>
+File generated from /home/artem/dev/takeAnumber/web/controllers/page_controller.ex by COVER 2016-02-28 at 09:29:36
+
+****************************************************************************
+
+     1..|  defmodule TakeAnumber.PageController do
+        |    use TakeAnumber.Web, :controller
+        |  
+        |    alias TakeAnumber.Number
+        |  
+        |    def index(conn, _params) do
+        |      query = from n in Number,
+        |        where: n.served == false
+        |      case Repo.all(query) do
+        |        [] -&gt;
+        |          render(conn, "finished.html")
+        |        [number | _] -&gt;
+        |          render(conn, "index.html", number: number)
+        |      end
+        |    end
+        |  
+        |    def next(conn, %{"id" =&gt; id}) do
+        |      number = Repo.get!(Number, id)
+        |      changeset = Number.changeset(number, %{served: true})
+        |  
+        |      case Repo.update(changeset) do
+        |        {:ok, number} -&gt;
+        |          conn
+        |          |&gt; redirect(to: page_path(conn, :index))
+        |        {:error, _} -&gt;
+        |          conn
+        |          |&gt; put_flash(:error, "Something went wrong")
+        |      end
+        |    end
+        |  
+        |    def new(conn, _params) do
+        |      changeset = Number.changeset(%Number{}, %{served: false})
+        |  
+        |      case Repo.insert(changeset) do
+        |        {:ok, number} -&gt;
+        |          conn
+        |          |&gt; put_flash(:info, "You are ##{number.id}, you will be served in order.")
+        |          |&gt; redirect(to: page_path(conn, :index))
+        |        {:error, _} -&gt;
+        |          conn
+        |          |&gt; put_flash(:error, "Something went wrong! Please try again.")
+        |          |&gt; redirect(to: page_path(conn, :index))
+        |      end
+        |    end
+        |  end
+</pre>
+</body>
+</html>
