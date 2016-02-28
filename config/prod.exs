@@ -14,7 +14,7 @@ use Mix.Config
 config :takeAnumber, TakeAnumber.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [scheme: "https", host: "takeanumber.herokuapp.com", port: 80],
-  cache_static_manifest: "priv/static/manifest.json"
+  cache_static_manifest: "priv/static/manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 # Configure your database
