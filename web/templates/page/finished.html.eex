@@ -1,3 +1,4 @@
-<div class="jubotron">
+<div class="jumbotron">
     <h2>Everyone is happy!!!</h2>
+    <%= link "New Number", to: page_path(@conn, :new), method: :post, class: "btn btn-primary" %>
 </div>
